@@ -1,8 +1,31 @@
 # Workspace-level compose. Run everything from this folder.
 #   docker compose up --build        gateway + fake city backend
 #   docker compose up -d mock        TinyCity MCP mock
+#   docker compose up --build gateway-tinycity   TinyCity REST behind the gateway (127.0.0.1:8081)
 name: agent-gateway-workspace
 
 include:
   - path: agentgw/docker-compose.yml
   - path: tinycity-mock/docker-compose.yml
+
+services:
+  # Gateway in front of the TinyCity REST mock (level 0 integration, in-memory policy store).
+  #   docker compose up --build gateway-tinycity   -> dev API and MCP on http://127.0.0.1:8081
+  # Manifest: tinycity-mock/gateway/manifest.json
+  gateway-tinycity:
+    build: { context: agentgw, target: gateway }
+    command:
+      - --manifest=/etc/agentgw/manifest.json
+      - --backend-url=http://rest:8001
+      - --addr=0.0.0.0:8081
+      - --public-url=http://127.0.0.1:8081
+      - --tenant=tinycity
+      - --dev-auth
+    environment:
+      - AGENTGW_SIGNING_SECRET=${AGENTGW_SIGNING_SECRET:-dev-secret}
+    volumes:
+      - ./tinycity-mock/gateway:/etc/agentgw:ro
+    ports:
+      - "127.0.0.1:8081:8081"
+    depends_on:
+      rest: { condition: service_started }
