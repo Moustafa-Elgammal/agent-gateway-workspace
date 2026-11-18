@@ -42,8 +42,9 @@ only pins the two projects and provides a shared `docker-compose.yml`.
 | M0 Foundations | Manifest, policy, signing, REST connector, audit, call pipeline, dev API | Done |
 | M1 MCP transport | Official Go SDK, tools from the manifest, streamable HTTP, YAML manifest, conformance suite | Done |
 | M2 Policy engine | Redis-backed policy, concurrency tests, confirmations in Postgres, kill switches | Done |
-| M3 Auth | Token validation, authorization server, link tickets, consent, revocation | Next (design decisions open) |
-| M4 to M6 | Studio APIs, relay, hardening | Planned |
+| M3 Auth | Token validation, authorization server, link tickets, consent, revocation | Exit criterion met; OIDC login at consent open |
+| M4 Studio and player APIs | Manifest upload and rollback, key rotation, activity feed (grants and approvals are already there) | Next |
+| M5 to M6 | Relay, hardening | Planned |
 
 Details: [`agentgw/docs/ROADMAP.md`](https://github.com/Moustafa-Elgammal/agent-gateway-workspace-/blob/main/agentgw/docs/ROADMAP.md).
 
