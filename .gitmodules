@@ -1,0 +1,6 @@
+[submodule "agentgw"]
+	path = agentgw
+	url = https://github.com/Moustafa-Elgammal/agentgw.git
+[submodule "tinycity-mock"]
+	path = tinycity-mock
+	url = https://github.com/Moustafa-Elgammal/tinycity-mock.git

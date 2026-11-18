@@ -1,0 +1,8 @@
+# Workspace-level compose. Run everything from this folder.
+#   docker compose up --build        gateway + fake city backend
+#   docker compose up -d mock        TinyCity MCP mock
+name: agent-gateway-workspace
+
+include:
+  - path: agentgw/docker-compose.yml
+  - path: tinycity-mock/docker-compose.yml

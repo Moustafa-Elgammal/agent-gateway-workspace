@@ -1,0 +1,19 @@
+projects.tar.gz
+
+# Editors and IDEs
+.idea/
+*.iml
+*.iws
+.vscode/
+.vs/
+*.code-workspace
+.fleet/
+.history/
+.project
+.classpath
+.settings/
+*.swp
+*.swo
+*~
+.DS_Store
+Thumbs.db
