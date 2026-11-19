@@ -11,11 +11,11 @@ include:
 services:
   # Gateway in front of the TinyCity REST mock (level 0 integration, in-memory policy store).
   #   docker compose up --build gateway-tinycity   -> dev API and MCP on http://127.0.0.1:8081
-  # Manifest: tinycity-mock/gateway/manifest.json
+  # Manifest: tinycity-mock/gateway/manifest.yaml
   gateway-tinycity:
     build: { context: agentgw, target: gateway }
     command:
-      - --manifest=/etc/agentgw/manifest.json
+      - --manifest=/etc/agentgw/manifest.yaml
       - --backend-url=http://rest:8001
       - --backend-allow-private   # the backend is on the compose network; dev only
       - --addr=0.0.0.0:8081
