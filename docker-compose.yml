@@ -17,6 +17,7 @@ services:
     command:
       - --manifest=/etc/agentgw/manifest.json
       - --backend-url=http://rest:8001
+      - --backend-allow-private   # the backend is on the compose network; dev only
       - --addr=0.0.0.0:8081
       - --public-url=http://127.0.0.1:8081
       - --tenant=tinycity
