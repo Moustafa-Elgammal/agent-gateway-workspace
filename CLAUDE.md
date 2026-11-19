@@ -21,6 +21,10 @@ Start in the project folder you are working on and read its `CLAUDE.md`.
 - `tinycity-mock` is a standalone MCP server (`server.py`, one file) that mimics a game exposing
   tiered tools, rate limits, daily caps and an audit log. It is a test target, not a dependency
   of `agentgw`.
+- The mock serves a browser dashboard (city map, resources, charts, audit) at `/` on both its ports
+  (8000 MCP, 8001 REST). On the MCP port, agent actions wait for a click on that page
+  (`TINYCITY_APPROVAL=1`). Through the gateway, `build_structure` is held by the gateway's own
+  confirmation instead. Details in `tinycity-mock/README.md`.
 - `agentgw/examples/city/` is a separate fake REST backend that verifies request signatures. It
   is what `docker compose up` runs behind the gateway.
 - Full design lives in `agentgw/docs/` (`ARCHITECTURE.md`, `PROTOCOL.md`, `SECURITY-MODEL.md`,
@@ -38,6 +42,8 @@ From this folder (needs Docker with Compose v2.20+):
 docker compose up --build              # gateway + fake city backend (127.0.0.1:8080)
 docker compose up -d mock              # TinyCity MCP mock (127.0.0.1:8000/mcp)
 docker compose run --rm mock-test      # mock end-to-end test
+docker compose up -d --build gateway-tinycity   # gateway on 127.0.0.1:8081 in front of the REST mock
+docker compose build bridge            # image agentgw-bridge:latest for Claude Desktop (stdio to gateway)
 docker compose down
 ```
 
